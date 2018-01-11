@@ -21,9 +21,19 @@ Game.create = function() {
         layer = map.createLayer(i)
     }
     layer.inputEnabled = true;
+    layer.events.onInputUp.add(Game.getCoordinates, this);
     Client.askNewPlayer();
 }
 
 Game.addNewPlayer = function(id, x, y) {
     Game.playerMap[id] = game.add.sprite(x, y, 'sprite');
+}
+
+Game.removePlayer = function(id) {
+    Game.playerMap[id].destroy();
+    delete Game.playerMap[id];
+}
+
+Game.getCoordinates = function(layer, pointer) {
+    Client.sendClick(pointer.worldX, pointer.worldY);
 }
