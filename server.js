@@ -11,7 +11,8 @@ app.get('/', function(request, response) {
     response.sendFile(__dirname + '/index.html');
 });
 
-server.listen(8081, function() {
+var port = process.env.PORT || 3000;
+server.listen(port, function() {
     console.log('Listening on ' + server.address().port);
 });
 
